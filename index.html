@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework_1</title>
+</head>
+<body>
+  <ul id="myUL"><li id="child">Первый</li><li>Второй</li><li>Третий</li><li>Четвертый</li><li>Пятый</li><li>Шестой</li></ul>
+  <button style="display: flex; margin: 4px;" onclick="firstElement()">Выбрать первый элемент</button>
+  <button style="display: flex; margin: 4px;" onclick="lastElement()">Выбрать последний элемент</button>
+  <button style="display: flex; margin: 4px;" onclick="nextElement()">Выбрать следующий элемент</button>
+  <button style="display: flex; margin: 4px;" onclick="previousElement()">Выбрать предыдущий элемент</button>
+  <button style="display: flex; margin: 4px;" onclick="addElement()">Добавить элемент</button>
+  <button style="display: flex; margin: 4px;" onclick="delElement()">Удалить элемент</button>
+  <button style="display: flex; margin: 4px;" onclick="addTopElement()">Добавить элемент в начало</button>
+  <script type="text/javascript">
+
+    function firstElement() {
+      myUL.childNodes[0].style.color = "red";
+    };
+
+    function lastElement() {
+      var elems = document.getElementsByTagName("li");
+      var lastElement = elems[elems.length -1];
+      lastElement.style.color = 'blue';
+    };
+
+    var counter = 0;
+    function nextElement() {
+      var elems = document.getElementsByTagName("li");
+      ++counter;
+      if(counter < elems.length ) {
+        elems[counter].style.color = 'green';
+      var previousElement = elems[counter - 1];
+      previousElement.style.color = 'black';   
+      } else {
+        counter = -1;
+        elems[elems.length - 1].style.color = 'black';
+        nextElement();
+      }
+    };
+
+    var temp = document.getElementsByTagName("li").length;
+    function previousElement() {
+      var element = document.getElementsByTagName("li");
+      if(temp >= 0) {
+        element[temp].style.color = 'yellow';
+        var previousElement = element[temp + 1];
+        previousElement.style.color = 'black';
+      } else {
+        count = element.length-1;
+        element[temp].style.color = 'yellow';
+        element[0].style.color = 'black';
+      }
+      temp--;
+    }
+
+    function addElement() {
+      var newItem = document.createElement("li");
+      newItem.innerHTML = "Новый элемент";
+      document.getElementById("myUL").appendChild(newItem);
+    };
+
+    function addTopElement() {
+      var elems = document.getElementsByTagName('li');
+      if(elems.length > 0) {
+        var newItem = document.createElement("li");
+        newItem.innerHTML = "Новый элемент в начале списка";
+        var tempItem = document.getElementById('child');
+        var parentUl = tempItem.parentNode;
+        parentUl.insertBefore(newItem, tempItem);
+      }
+      else {
+        alert('Нет начала списка');
+      }
+    };
+
+    function delElement() {
+      var element = document.getElementById("myUL");
+      element.removeChild(element.lastChild);
+    }
+    
+  </script>
+  
+</body>
+</html>
